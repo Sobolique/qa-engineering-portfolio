@@ -1,0 +1,33 @@
+name: QA Portfolio Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  api-mock-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r 02_API_Testing/requirements.txt
+      - name: Start offline fixture
+        run: python 02_API_Testing/local_mock_server.py > /tmp/mock.log 2>&1 & 
+      - name: Execute API tests
+        env:
+          QA_API_BASE_URL: http://127.0.0.1:8765
+        run: pytest -v 02_API_Testing/test_posts_api.py
+  ui-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 03_Playwright_Automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - run: npm test

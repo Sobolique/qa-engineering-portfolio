@@ -1,0 +1,11 @@
+ID,Area,Scenario,Precondition,Steps,Expected Result,Status
+EC-001,Login,Valid credentials,Login page,Enter valid username and password and submit,Inventory page appears,Not Run
+EC-002,Login,Invalid password,Login page,Enter valid username and incorrect password,Clear error and no sign in,Not Run
+EC-003,Login,Empty fields,Login page,Submit blank form,Validation prevents login,Not Run
+EC-004,Inventory,Sort price ascending,Logged in,Select price low to high,Products sorted ascending,Not Run
+EC-005,Inventory,Sort name descending,Logged in,Select name Z to A,Products sorted alphabetically descending,Not Run
+EC-006,Cart,Add product,Inventory page,Add first product and open cart,Product shown in cart,Not Run
+EC-007,Cart,Remove product,One product in cart,Remove product from cart,Cart becomes empty,Not Run
+EC-008,Checkout,Valid checkout,Item in cart,Fill valid info and finish checkout,Confirmation displayed,Not Run
+EC-009,Checkout,Missing first name,Item in cart,Submit checkout without first name,Validation error,Not Run
+EC-010,Checkout,Missing postal code,Item in cart,Submit checkout without postal code,Validation error,Not Run
